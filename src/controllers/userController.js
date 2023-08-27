@@ -58,5 +58,10 @@ module.exports = {
             delete user.password
             return res.status(200).json(user)
         }
+    },
+
+    async initLogin(req, res) {
+        const { user } = req
+        return res.status(200).json(user)
     }
 }

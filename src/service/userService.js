@@ -8,6 +8,12 @@ module.exports = {
         return user[0][0]
     },
 
+    async findOneById(id) {
+        const sql = 'select * from users where id = ?'
+        const user = await pool.query(sql, [id])
+        return user[0][0]
+    },
+
     async createUser(input) {
         const sql = `insert into users (username, password) values ('${input.username}', '${input.password}')`
         const user = await pool.query(sql)
@@ -27,7 +33,6 @@ module.exports = {
             }
         }
         sql = sql + ` where id = '${id}'`
-        const user = await pool.query(sql)
-        return user
+        return await pool.query(sql)
     }
 }
