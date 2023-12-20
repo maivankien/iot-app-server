@@ -6,6 +6,6 @@ const userMiddleware = require('../middlewares/userMiddleware')
 
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.post('/initLogin', userMiddleware.authUser, userController.initLogin)
+router.post('/init-login', userMiddleware.authUser, userController.initLogin)
 
 module.exports  = router

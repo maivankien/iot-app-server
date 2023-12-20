@@ -3,14 +3,12 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
     createToken(id) {
-        const token = jwt.sign({ id }, process.env.SECRET_KEY)
-        return token
+        return jwt.sign({ id }, process.env.SECRET_KEY)
     },
 
     decodeToken(token) {
         try {
-            const decoded = jwt.verify(token, process.env.SECRET_KEY)
-            return decoded
+            return jwt.verify(token, process.env.SECRET_KEY)
         } catch (error) {
             return false
         }

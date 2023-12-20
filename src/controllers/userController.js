@@ -14,7 +14,7 @@ module.exports = {
         const check = await userService.findOneUserName(username)
 
         if (check) {
-            return res.status(403).json({
+            return res.status(409).json({
                 message: 'User already exists'
             })
         } else {
@@ -44,14 +44,14 @@ module.exports = {
         const { username, password } = req.body
         const user = await userService.findOneUserName(username)
         if (!user) {
-            return res.status(400).json({
+            return res.status(401).json({
                 message: 'Incorrect username or password'
             })
         }
         const check = await bcrypt.compare(password, user.password)
 
         if (!check) {
-            return res.status(400).json({
+            return res.status(401).json({
                 message: 'Incorrect username or password'
             })
         } else {
