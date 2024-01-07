@@ -1,6 +1,20 @@
+const deviceHandler = require('./device.handler')
+const subscriptionHandler = require('./subscriptionHandler')
+
+subscriptionHandler.subscribe('home/device')
+subscriptionHandler.subscribe('home/device/connected')
+
 module.exports = (mqttClient) => {
-    mqttClient.subscribe('mqtt/topic')
     mqttClient.on('message', (topic, message) => {
-        console.log(`Received message on topic: ${topic}. Message: ${message.toString()}`);
+        switch (topic) {
+            case 'home/device':
+                // deviceHandler.
+                break;
+            case 'home/device/connected':
+                deviceHandler.handleDeviceConnected()
+                break;
+            default:
+                break;
+        }
     })
 }

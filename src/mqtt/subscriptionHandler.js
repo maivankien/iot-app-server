@@ -5,9 +5,16 @@ module.exports = {
         mqttClient.subscribe(topic)
     },
 
-    async getMessage() {
+    async getMessage(topicGet) {
         mqttClient.on('message', (topic, message) => {
-            console.log(topic, message)
+            if (topic === topicGet) {
+                return message
+            } 
+            return null
         })
-    }
+    },
+
+    async publish(topic, message) {
+        mqttClient.publish(topic, message)
+    },
 }

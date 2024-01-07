@@ -1,7 +1,7 @@
 require("dotenv").config()
 const bcrypt = require('bcrypt')
 const jwtHelper = require('../helpers/jwtHelper')
-const userService = require('../service/userService')
+const userService = require('../services/user.service')
 
 module.exports = {
     async register(req, res) {

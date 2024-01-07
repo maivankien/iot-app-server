@@ -1,4 +1,4 @@
-const deviceService = require('../service/device.service');
+const deviceService = require('../services/device.service');
 
 module.exports = {
     async getListDevice(req, res) {

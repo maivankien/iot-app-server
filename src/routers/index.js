@@ -1,6 +1,6 @@
 const user = require('./user')
 const device = require('./device')
-const userMiddleware = require('../middlewares/userMiddleware')
+const userMiddleware = require('../middlewares/user.middleware')
 
 
 const route = (app) => {

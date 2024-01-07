@@ -1,5 +1,5 @@
 const jwtHelper = require('../helpers/jwtHelper')
-const userService = require('../service/userService')
+const userService = require('../services/user.service')
 
 module.exports = {
     async authUser(req, res, next) {
