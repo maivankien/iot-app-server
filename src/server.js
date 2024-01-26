@@ -5,6 +5,7 @@ const route = require("./routers/index.js")
 
 const mqttClient = require('./config/mqtt.js')
 const handleEvent = require('./mqtt/handleEvent.js')
+const energyCron = require('./cron/energy.cron.js')
 
 const app = express()
 const port = process.env.PORT
@@ -15,6 +16,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 route(app)
+
+energyCron.scheduleJobs()
 
     ; (async () => {
         try {
