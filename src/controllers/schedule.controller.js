@@ -5,6 +5,7 @@ const {
     deleteSchedule, 
     executeSchedule, 
     countScheduleByDeviceId, 
+    getAllSchedulesByDeviceId,
 } = require('../services/schedule.service.js')
 
 async function createJob(req, res) {
@@ -73,6 +74,16 @@ async function deleteJob(req, res) {
     })
 }
 
+async function getAllJobs(req, res) {
+    const { deviceId } = req.params
+    const jobs = await getAllSchedulesByDeviceId(deviceId)
 
+    if (jobs) {
+        return res.status(200).json(jobs)
+    }
+    return res.status(500).json({
+        message: "Internal server error"
+    })
+}
 
-module.exports = { createJob, updateJob, deleteJob }
+module.exports = { createJob, updateJob, deleteJob, getAllJobs }
