@@ -6,7 +6,7 @@ const route = require("./routers/index.js")
 const mqttClient = require('./config/mqtt.js')
 const handleEvent = require('./mqtt/handleEvent.js')
 const energyCron = require('./schedule/energy.cron.js')
-const setupSchedule = require('./schedule/setup.schedule.js')
+const setupSchedule = require('./schedule/setup.js')
 
 const app = express()
 const port = process.env.PORT
@@ -25,7 +25,7 @@ energyCron.scheduleJobs()
         try {
             app.listen(port, hostname, () => {
                 handleEvent(mqttClient)
-                console.log(`Backend Nodejs listening on port ${port}`)
+                console.log(`Server listening on port ${port}`)
             })
         } catch (error) {
             console.log('Server Error:>> ', error)
