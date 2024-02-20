@@ -6,15 +6,16 @@ const { getSchedules, executeSchedule } = require('../services/schedule.service'
 async function setupSchedule() {
     const schedules = await getSchedules()
     schedules.forEach(item => {
-        if (item.time < Date.now()) {
-            executeSchedule(item.id, item.device_id, item.action)
+        const { id, time, device_id, action } = item
+        if (time < Date.now()) {
+            executeSchedule(id, device_id, action)
         } else {
-            const dateTime = new Date(item.time)
+            const dateTime = new Date(time)
             const job = schedule.scheduleJob(dateTime, () => {
-                executeSchedule(item.id, item.device_id, item.action)
+                executeSchedule(id, device_id, action)
             })
 
-            if (job) Jobs[item.id] = job
+            if (job) Jobs[id] = job
         }
     })
 }
