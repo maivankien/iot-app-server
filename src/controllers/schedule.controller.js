@@ -60,8 +60,11 @@ async function updateJob(req, res) {
 
 async function deleteJob(req, res) {
     const { id } = req.params
-    Jobs[id].cancel()
-    delete Jobs[id]
+
+    if (Jobs["id"] !== undefined) {
+        Jobs[id].cancel()
+        delete Jobs[id]
+    }
 
     const result = await deleteSchedule(id)
     if (result) {
