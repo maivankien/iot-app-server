@@ -32,7 +32,7 @@ async function getSchedules() {
 
 async function getAllSchedulesByDeviceId(deviceId) {
     try {
-        const sql = `SELECT * FROM schedule_jobs WHERE device_id = ? AND status = 1 AND deleted_at IS NULL ORDER BY ID DESC`
+        const sql = `SELECT * FROM schedule_jobs WHERE device_id = ? AND status = 1 AND deleted_at IS NULL ORDER BY time ASC`
 
         return (await pool.query(sql, [deviceId]))[0]
     } catch (error) {
