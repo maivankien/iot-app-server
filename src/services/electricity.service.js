@@ -10,7 +10,7 @@ module.exports = {
                 VALUES (?, ?, ?, ?, ?, ?)`
 
             const values = [
-                Date.now() / 1000,
+                Math.floor(Date.now() / 1000),
                 inputs.voltage,
                 inputs.current,
                 inputs.power,
