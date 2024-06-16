@@ -19,6 +19,17 @@ async function getScheduleByDeviceId(condition) {
     }
 }
 
+async function getScheduleByTime(deviceId, time) {
+    try {
+        const sql = `SELECT * FROM schedule_jobs WHERE device_id = ? AND time = ? AND status = 1 AND deleted_at IS NULL`
+
+        return (await pool.query(sql, [deviceId, time]))[0]
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
 async function getSchedules() {
     try {
         const sql = `SELECT * FROM schedule_jobs WHERE status = 1 AND deleted_at IS NULL`
@@ -116,6 +127,7 @@ module.exports = {
     updateSchedule,
     deleteSchedule,
     executeSchedule,
+    getScheduleByTime,
     getScheduleByDeviceId,
     countScheduleByDeviceId,
     getAllSchedulesByDeviceId

@@ -3,7 +3,8 @@ const { Jobs } = require('../schedule/schedules.js')
 const { 
     createSchedule, 
     deleteSchedule, 
-    executeSchedule, 
+    executeSchedule,
+    getScheduleByTime, 
     countScheduleByDeviceId, 
     getAllSchedulesByDeviceId,
 } = require('../services/schedule.service.js')
@@ -14,9 +15,17 @@ async function createJob(req, res) {
     const dateTime = new Date(time)
 
     const count = await countScheduleByDeviceId([deviceId, action])
-    if (count.count >= 5) {
+    if (count.count >= 1) {
         return res.status(400).json({
             message: "Maximum number of schedule reached"
+        })
+    }
+    
+    const isExist = await getScheduleByTime(deviceId, dateTime.getTime())
+    if (isExist && isExist.length > 0) {
+        return res.status(400).json({
+            code: "SCHEDULE_EXIST",
+            message: "Schedule already exist"
         })
     }
 
